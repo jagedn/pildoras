@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
+    <!-- Barra 1 (inferior) -->
+    <rect x="20" y="110" width="100" height="20" fill="#3498db"/>
+
+    <!-- Barra 2 -->
+    <rect x="40" y="85" width="100" height="20" fill="#2980b9"/>
+
+    <!-- Barra 3 -->
+    <rect x="60" y="60" width="100" height="20" fill="#1f6da8"/>
+
+    <!-- Barra 4 (superior) -->
+    <rect x="80" y="35" width="100" height="20" fill="#165a8e"/>
+</svg>

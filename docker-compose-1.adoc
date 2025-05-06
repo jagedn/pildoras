@@ -1,0 +1,129 @@
+= Cheat Sheet: Docker Compose
+Jorge Aguilera <www.linkedin.com/in/jagedn>;
+:imagesdir: jagedn/assets
+:email: https://www.linkedin.com/in/jagedn
+:authorbio: Mentors juniors by telling old "war" stories
+:avatar: jagedn.jpeg
+:pdf-width: 508mm
+:pdf-height: 361mm
+:sectnums:
+
+== Docker Básico
+
+
+Compras una computadora
+
+```
+docker create 
+```
+
+Compras una computadora y la enchufas
+
+```
+docker run
+```
+
+
+Haces shutdown a una computadora
+
+```
+docker stop
+```
+
+
+Vuelves a encender la computadora
+
+```
+docker start
+```
+
+La tiras por la ventana con todos los datos que hubiera
+(Ojo con tus bitcoins)
+```
+docker rm
+```
+
+
+== Somos un DataCenter
+
+Vamos a ver a nuestra computadora como un DataCenter que ofrece alojamiento
+
+[.do]
+* [x] Somos un DataCenter que ofrece infraestructura
+* [x] Damos sevicio a muchos clientes (proyectos)
+* [x] Cada cliente está aislado del resto
+* [x] Un cliente puede cancelar cuando quiera
+* [x] Cada cliente quiere ejecutar diferentes servicios
+* [x] Cada cliente quiere acceder a su infra desde su casa
+
+
+== Docker Compose como un DataCenter
+
+
+Docker compose es un "plugin" de Docker que te simplifica la gestión de coordinar
+varios containers (red, volumen, variables de entorno, ...)
+
+En un único fichero de texto YAML configuramos todos los servicios relacionados (asi que puedes versionarlo)
+
+
+- Cada cliente lo alojaremos en un directorio diferente
+
+- Su infra estará en un fichero `docker-compose.yml`
+
+- Los datos están aislados del resto al usar subdirectorios
+
+- Podemos tener varios clientes levantados ... si la computadora tiene recursos
+
+- Podemos compartir puertos de la computadora asignandolos a puertos de las instancias
+
+== Alta de cliente
+
+Un "cliente" quiere un mysql y un redis ejecutandose
+
+.cliente1/docker-compose.yml
+[source,yml,role=do]
+----
+services:
+  mysql:
+    image: "mysql:5.7.20"    
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_PASSWORD=password
+      - MYSQL_USER=user
+    ports:
+      - '3306:3306'
+  redis:
+     image: "redis"
+----
+
+`docker compose up -d`
+
+[.do]
+* [x] Docker descarga imagenes
+* [x] Crea los containers y su network
+* [x] Abre un puerto del "datacenter" asociandolo al mysql
+
+== Suspension de cliente
+
+El "cliente" no ha pagado y le suspendemos el servicio (a.k.a. tenemos que trabajar en otro proyecto y no tenemos recursos para todos)
+
+`docker compose stop`
+
+**Los recursos siguen presente pero no están ejecutandose. El puerto 3306 está libre**
+
+== Baja de cliente
+
+El "cliente" no va a pagar y le damos de baja (a.k.a. hemos entregado el proyecto y ya no lo necesitamos):
+
+`docker compose rm -v`
+
+**Todos los datos se han borrado**
+
+== Más pildoras
+
+Sigueme para más pildoras o si necesitas un desarrollo software contactame
+
+https://incsteps.com[Incremental Steps Software Solutions].
+
+

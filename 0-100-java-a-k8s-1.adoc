@@ -1,0 +1,87 @@
+= Desplegando servicio Java en Kubernetes, 1/2
+Jorge Aguilera <www.linkedin.com/in/jagedn>;
+:imagesdir: jagedn/assets
+:email: https://www.linkedin.com/in/jagedn
+:authorbio: Mentors juniors by telling old "war" stories
+:avatar: jagedn.jpeg
+:pdf-width: 508mm
+:pdf-height: 361mm
+:sectnums:
+
+== Objetivo
+
+[.do]
+* [ ] Desplegar un servicio Java en Kubernetes
+* [ ] Todo desde cero
+* [ ] Todo en local
+* [ ] Aprender kubernetes básico
+
+== Requisitos
+
+[.do]
+* [x] Linux (ni idea si Windows funciona)
+* [x] Cuenta en Hub Docker
+* [x] Kubectl instalado (tool linea de comando)
+
+== Instalar Java (con Sdkman)
+
+[source]
+----
+curl -s "https://get.sdkman.io" | bash
+source \"${SDKMAN_DIR}/bin/sdkman-init.sh
+sdk install java
+sdk install micronaut
+----
+
+== Crear HelloWorld
+
+[source]
+----
+mn create-app --build gradle com.incsteps.demo.helloworld
+cd helloworld
+----
+
+== Configurar imagen Docker
+
+Editar `build.gradle` y configurar nuestro namespace
+
+.build.gradle
+[source]
+----
+// añade:
+tasks.named("dockerBuild") {
+    images = ["incsteps/helloworld"] //<1>
+}
+<1> cambia incsteps por tu namespace de Docker Hub
+----
+
+== Controller
+
+.src/main/java/com/incsteps/demo/HelloController.java
+[source]
+----
+package com.incsteps.demo;
+
+import java.util.Map;
+import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Produces;
+
+@Controller("/")
+public class HelloController {
+    @Get
+    public Map<String,String> index() {
+        return Map.of("result","Hello World");
+    }
+}
+----
+
+
+== Publicar la imagen
+
+[source]
+----
+./gradlew clean dockerPush
+----
+
