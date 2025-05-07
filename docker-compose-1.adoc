@@ -120,10 +120,5 @@ El "cliente" no va a pagar y le damos de baja (a.k.a. hemos entregado el proyect
 
 **Todos los datos se han borrado**
 
-== Más pildoras
-
-Sigueme para más pildoras o si necesitas un desarrollo software contactame
-
-https://incsteps.com[Incremental Steps Software Solutions].
 
 

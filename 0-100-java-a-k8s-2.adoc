@@ -7,6 +7,8 @@ Jorge Aguilera <www.linkedin.com/in/jagedn>;
 :pdf-width: 508mm
 :pdf-height: 361mm
 :sectnums:
+:last-page: true
+
 
 == Crear Cluster (en local)
 
@@ -97,9 +99,3 @@ spec:
 
 Abre un navegador en http://localhost:8081/hello/
 
-
-== Más pildoras
-
-Sigueme para más pildoras
-
-https://incsteps.com[Incremental Steps Software Solutions].

@@ -20,17 +20,31 @@ const getAuthors = function (node) {
 }
 
 const renderAuthors = function (node) {
+  const lastpage = node.getAttribute('last-page');
+  if( lastpage !== undefined && lastpage === "false" ) return "";
+
   const authors = getAuthors(node)
 
   return authors.map(author => {
     const authorImageUri = node.getMediaUri(`${author.avatar}`)
-    return `<div class="author">
+    return `
+<h3>Authors :</h3>
+<div class="author">
 <div class="author-avatar"><img src="${authorImageUri}"/></div>
 <div class="author-name"><a href="${author.email}">${author.email}</a></div>
 <div class="author-bio">${author.bio}</div>
 </div>
 `;
   }).join('\n')
+}
+
+const renderRepository = function (node) {
+  const lastpage = node.getAttribute('last-page');
+  if( lastpage !== undefined && lastpage === "false" ) return "";
+  return `<div class="repository-container">
+<a href="https://github.com/jagedn/pildoras/pdfs">Ir al repositorio de pildoras</a>
+</div>
+`;
 }
 
 
@@ -52,8 +66,8 @@ module.exports = {
 <section class="content">
 ${node.getContent()}
 <div class="sect1 authors">
-<h3>Authors :</h3>
 ${renderAuthors(node)}
+${renderRepository(node)}
 </div>
 </section>
 </body>`
