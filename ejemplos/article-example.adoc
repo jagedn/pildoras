@@ -1,0 +1,40 @@
+= Mi articulo
+Jorge Aguilera <jorge@incsteps.com>
+1.0, Mayo 4, 2025: Pildora Asciidoctor
+:toc:
+:icons: font
+
+Esta linea es el preambulo
+
+== Capítulo 1
+
+Esto es un párrafo. Usa * y _ como en markdown para formatear palabras.
+Por ejemplo *esto va en negrita*
+
+Incluye imágenes con image::
+
+image::image-file-name.png[I am the image alt text.]
+
+=== Subcapitulo
+
+Fijate que este lleva 3 =
+
+.Lista
+* list item 1
+** nested list item
+*** nested nested list item 1
+*** nested nested list item 2
+* list item 2
+
+== Tabla
+
+.Table title
+|===
+|Column heading 1 |Column heading 2
+
+|Column 1, row 1
+|Column 2, row 1
+
+|Column 1, row 2
+|Column 2, row 2
+|===

@@ -1,0 +1,105 @@
+= Asciidoctor basic
+Jorge Aguilera <www.linkedin.com/in/jagedn>;
+:imagesdir: jagedn/assets
+:email: https://www.linkedin.com/in/jagedn
+:authorbio: Mentors juniors by telling old "war" stories
+:avatar: jagedn.jpeg
+:pdf-width: 508mm
+:pdf-height: 361mm
+:sectnums:
+
+== Markdown
+
+[.do]
+- [*] Simplicidad: Markdown destaca por su sintaxis sencilla. Ideal para documentación rápida
+- [*] Extensibilidad: No es sencillo (no confundir con aplicaciones que lo usan)
+- [*] Formato: centrado en la generación de HTML
+- [*] Comunidad: comunidad muy grande y un ecosistema maduro de editores, convertidores y herramientas
+- [*] perfecto para blogs, documentación ligera, READMEs de proyectos y mensajería instantánea.
+
+== Asciidoctor
+
+[.do]
+- [*] Simplicidad: sintaxis más rica y potente, permitiendo la creación de documentos más complejos con características avanzadas como referencias cruzadas, tablas elaboradas y diagramas.
+- [*] Extensibilidad: diseñado para ser altamente extensible. Admite atributos, macros y lenguajes de inclusión.
+- [*] Formato: amplia variedad de formatos de salida, incluyendo HTML, PDF, EPUB, y man pages, entre otros.
+- [*] Comunidad: ecosistema en crecimiento y un fuerte respaldo de empresas que requieren documentación técnica avanzada.
+- [*] documentación técnica, libros, manuales de usuario y cualquier escenario que requiera una estructura compleja.
+
+== Install
+
+[source]
+----
+curl -s "https://get.sdkman.io" | bash
+source \"${SDKMAN_DIR}/bin/sdkman-init.sh
+sdk install asciidoctorj
+----
+
+== Article
+
+Crea un fichero de texto donde quieras y pega tal cual:
+
+[source,asciidoc]
+----
+= Mi articulo
+Jorge Aguilera <jorge@incsteps.com>
+1.0, Mayo 4, 2025: Pildora Asciidoctor
+:toc:
+:icons: font
+
+Esta linea es el preambulo
+
+== Capítulo 1
+
+Esto es un párrafo. Usa * y _ como en markdown
+para formatear palabras.
+Por ejemplo *esto va en negrita* y si te fijas un parrafo
+son varias lineas hasta que encuentre una linea en blanco
+
+Incluye imágenes con "image::nombre-imagen.png[]"
+
+image::image-file-name.png[I am the image alt text.]
+
+=== Subcapitulo
+
+Fijate que este lleva 3 =
+
+.Lista
+* list item 1
+** nested list item
+*** nested nested list item 1
+*** nested nested list item 2
+* list item 2
+
+== Tabla
+
+.Table title
+|===
+|Column heading 1 |Column heading 2
+
+|Column 1, row 1
+|Column 2, row 1
+
+|Column 1, row 2
+|Column 2, row 2
+|===
+
+----
+
+== Build
+
+Crear un HTML completo:
+
+[source]
+----
+asciidoctorj article-example.adoc
+----
+
+Crear un Pdf:
+
+[source]
+----
+asciidoctorj -b pdf article-example.adoc`
+----
+
+(otros formatos epub, etc)
