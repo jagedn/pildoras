@@ -1,0 +1,103 @@
+= Comandos básicos de Linux para el día a día
+Jorge Aguilera <www.linkedin.com/in/jagedn>;
+:imagesdir: jagedn/assets
+:email: https://www.linkedin.com/in/jagedn
+:authorbio: Mentors juniors by telling old "war" stories
+:avatar: jagedn.jpeg
+:pdf-width: 508mm
+:pdf-height: 361mm
+
+== Objetivo
+
+Existen auténticas máquinas de la terminal de Linux.
+
+Yo no soy uno de ellos. Yo sólo me sé un puñado de comandos y me vengo
+apañando con ellos desde hace tiempo
+
+En estas píldoras el carácter "$" inicial indica el prompt, no tienes que escribirlo
+
+== ¿Dónde estoy?
+
+Cuando estés confuso y no sepas en qué directorio estás:
+
+```
+$ pwd
+```
+
+== Cambiar de directorio
+
+[source]
+----
+$ cd hola           #<1>
+$ cd ..             #<2>
+$ cd hola/caracola  #<3>
+$ cd $HOME          #<4>
+$ cd ~              #<5>
+----
+<1> me "meto" en hola
+<2> vuelvo atrás
+<3> me "meto" en hola y luego en caracola
+<4> directo a mi $HOME (/home/jorge)
+<5> lo mismo pero tienes que buscar el caracter ~
+
+== Crear directorio
+
+```
+$ mkdir hola
+$ mkdir -p hola/caracola/hola/caraculo #<1>
+```
+<1> Si quieres crear una ruta de varios directorios puedes hacerlo de un tirón
+
+== ¿Qué hay aquí?
+
+```
+$ ls -lhat
+```
+
+"ls" tiene miles de opciones. Yo siempre lo ejecuto así, tal cual.
+
+lista ficheros ordenados por fecha y tamaño en formato que yo entienda
+
+== Borrar fichero
+
+```
+$ rm uno.txt
+$ rm uno*
+$ rm -rf * # <1>
+```
+<1> Famoso chiste pq te borras todo desde ahí hacia abajo
+
+== Editar fichero con nano
+
+```
+$ nano hola.txt
+(escribes sin más)
+(ni ESC ni gaitas)
+Ctrl + x para salir,
+te pregunta si guardar, le dices Y y Enter
+```
+
+== ¿Cómo era....?
+
+Pulsas "Ctrl + r" y empiezas a escribir lo que recuerdas del comando
+
+Te aparece una entrada del historial de tus comandos.
+
+- Si es la que buscabas pulsas "fin" y "enter"
+- Si no lo es pulsa "Ctrl + r" tantas veces hasta que te sugiera el que buscas
+
+
+== Tabulador es tu aliado
+
+En la mayoría de los terminales el tabulador te ayuda a autocompletar el comando:
+
+Estás en un directorio que tiene un subdirectorio llamado "pedazodenombreeldeestedir"
+
+Escribes
+
+```
+cd ped
+```
+
+y pulsas TAB (tabulador), el prompt se completa con el nombre completo
+
