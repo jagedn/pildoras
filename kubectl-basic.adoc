@@ -1,0 +1,126 @@
+= Comandos básicos de Kubectl
+Jorge Aguilera <www.linkedin.com/in/jagedn>;
+:imagesdir: jagedn/assets
+:email: https://www.linkedin.com/in/jagedn
+:authorbio: Mentors juniors by telling old "war" stories
+:avatar: jagedn.jpeg
+:pdf-width: 508mm
+:pdf-height: 361mm
+
+== Kubectl
+
+kubectl es el comando de consola básico para interactuar con un cluster
+
+Se instala simplemente descargando el binario de la página oficial
+
+__En estas píldoras el carácter "$" inicial indica el prompt, no tienes que escribirlo__
+
+== $HOME/.kube/config
+
+Fichero por defecto que se usa para guardar usuario y credenciales
+
+Admite configuración para varios cluster, contextos y usuarios
+
+tiene este aspecto
+
+[source]
+----
+apiVersion: v1
+kind: Config
+current-context: cluster_client1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiB.......
+    server: https://servidor
+  name: cluster_client1
+contexts:
+- context:
+    cluster: cluster_client1
+    user: user1
+  name: client1
+users:
+- name: user1
+  user:
+    client-certificate-data: LS0tLS.....
+----
+
+== ¿Cuántas "máquinas" tengo?
+
+[source]
+----
+$ kubectl get nodes
+----
+
+Lista los nodos que componen el cluster. Muestra su antiguedad y version
+
+Te da una idea de lo "cachas" que es tu cluster
+
+== ¿Cuántas "habitaciones" tengo?
+
+[source]
+----
+$ kubectl get namespaces
+----
+
+Podemos ver los namespaces como "habitaciones" en nuestro cluster donde
+podemos agrupar artefactos.
+
+Por ejemplo:
+
+- "dev", "sandbox", "prod"
+- "team1", "team2", "prod"
+
+== ¿Cuántas "aplicaciones"?
+
+Entendemos aplicaciones como "dockers" que hemos desplegado (nosotros o el sistema)
+
+[source]
+----
+$ kubectl get deployment
+----
+
+- Ready 3/3 (de las 3 instancias que queremos, todas están corriendo)
+- Ready 1/2 (de las 2 instancias que dijimos sólo hay 1 corriendo)
+
+== ¿Cuantas "instancias" ?
+
+Deployment != Pod
+
+[source]
+----
+$ kubectl get pods
+----
+
+== Ahora con namespace
+
+[source]
+----
+$ kubectl --namespace prod get deployment
+$ kubectl --namespace team1 get pods
+----
+
+== Ahora con contexts
+
+[source]
+----
+$ kubectl --context myclient --namespace prod get deployment
+$ kubectl --context mycluster --namespace prod get deployment
+----
+
+== "Entrando" en un pod
+
+Vamos a hacer un ssh a un pod
+
+[source]
+----
+$ kubectl get pods
+----
+
+Elije uno de la lista y ejecuta
+
+[source]
+----
+$ kubectl exec -it  el-pod-mtw69 -- /bin/bash
+----
+
+Si el pod tiene "bash" ahora estarías "dentro"
