@@ -1,0 +1,128 @@
+= Httpie
+Jorge Aguilera <www.linkedin.com/in/jagedn>;
+:imagesdir: jagedn/assets
+:email: https://www.linkedin.com/in/jagedn
+:authorbio: Mentors juniors by telling old "war" stories
+:avatar: jagedn.jpeg
+:pdf-width: 508mm
+:pdf-height: 361mm
+
+== Qué es?
+
+Aplicación de consola similar a curl.
+
+Yo lo uso para llamadas a servicios REST que devuelvan JSON
+
+[source]
+----
+# Install httpie
+# (tras añadirlo en la lista de apt)
+sudo apt install httpie
+----
+
+Se ejecuta con el comando *http* (ojo, no con *httpie*)
+
+== pie.dev
+
+Vamos a usar pie.dev, una página en Internet a modo de "echo" para probar
+llamadas
+
+== GET con QueryString
+
+usamos **==**
+
+[source]
+----
+$ http https://pie.dev/get hola==caracola respuesta==caraculo
+----
+
+Se traduce en
+
+https://pie.dev/get?hola=caracola&respuesta=caraculo
+
+== POST de un JSON simple
+
+usamos **=** para cada campo del form
+
+[source]
+----
+$ http POST pie.dev/post hola=caracola
+----
+
+Es un POST con un body '{"hola": "caracola"}'
+
+== PUT/DELETE/PATCH
+
+En la misma linea. Añades el método a usar al principio
+
+== POST de JSON
+
+Queremos hacer un post de un objeto:
+
+[source]
+----
+{
+  "usuario":{
+     "nombre": "jorge",
+     "direccion": {
+         "calle": "alcala",
+         "provincia":"madrid"
+     }
+  }
+}
+----
+
+[source]
+----
+$ http pie.dev/post usuario[nombre]=jorge \
+         usuario[direccion][calle]=alcala \
+         usuario[direccion][provincia]=madrid
+----
+
+== POST de un Array
+
+Queremos hacer un post de un objeto:
+
+[source]
+----
+[
+  {
+    "usuario":{
+       "nombre": "jorge"
+    }
+  },
+  {
+    "usuario":{
+       "nombre": "pepe"
+    }
+  }
+]
+----
+
+[source]
+----
+$ http  pie.dev/post [0][usuario][nombre]=jorge \
+                   [1][usuario][nombre]=pepe
+----
+
+
+== Cabeceras
+
+Queremos añadir una cabecera "X-PERSONAL"
+
+(vale en todos los metodos, en este ejemplo es con GET)
+
+Usamos **:** (dos puntos)
+
+[source]
+----
+$ http https://pie.dev/get X-PERSONAL:caracola hola==caracola
+----
+
+Enviamos un Header y un QueryString
+
+
+== Siguientes pasos
+
+Cuando el JSON de respuesta es grande concatenar _httpie_ con _jq_
+
